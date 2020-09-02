@@ -1,0 +1,77 @@
+[System]
+Name='Turismo'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=2
+NumRules=10
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='presupuesto'
+Range=[2000 30000]
+NumMFs=3
+MF1='bajo':'trapmf',[2000 2000 4000 6000]
+MF2='medio':'trapmf',[4500 9500 11500 15000]
+MF3='alto':'trimf',[12400 30000 30000]
+
+[Input2]
+Name='clima'
+Range=[0 60]
+NumMFs=5
+MF1='polar':'trapmf',[0 0 5 10]
+MF2='frio':'trimf',[7.1 15.4 16.7]
+MF3='templado':'trimf',[15 21 24]
+MF4='seco':'trapmf',[35 42 60 60]
+MF5='tropical':'trimf',[20.7 30 36]
+
+[Input3]
+Name='dias_de_estadia'
+Range=[0 30]
+NumMFs=3
+MF1='pocos':'trapmf',[0 0 3 8]
+MF2='algunos':'trimf',[4 13 20]
+MF3='muchos':'trapmf',[17.41 22.59 30 30]
+
+[Input4]
+Name='costo_vida'
+Range=[49 279]
+NumMFs=3
+MF1='bajo':'trimf',[-46.8 49 89.531197301855]
+MF2='medio':'trimf',[68.2 99 169.430016863406]
+MF3='alto':'trimf',[148 279 279]
+
+[Output1]
+Name='Costo'
+Range=[2000 30000]
+NumMFs=5
+MF1='barato':'trimf',[2000 2000 6000]
+MF2='promedio':'trimf',[8217 10530 13610]
+MF3='caro':'trapmf',[11690 17610 20650 24510]
+MF4='economico':'trimf',[3263 7292 9956]
+MF5='muy_caro':'trapmf',[20070 25920 32800 55160]
+
+[Output2]
+Name='Lugar'
+Range=[0 1]
+NumMFs=4
+MF1='medellin':'trimf',[-0.417 0 0.096964586846543]
+MF2='Moscu':'trimf',[0.361720067453626 0.5 0.719]
+MF3='honk_kong':'trimf',[0.727655986509275 1 1.42]
+MF4='sahara':'trimf',[0.096964586846543 0.299 0.353]
+
+[Rules]
+3 0 3 3, 5 0 (1) : 1
+2 0 2 2, 2 0 (1) : 1
+1 0 1 1, 1 0 (1) : 1
+1 0 2 1, 4 0 (1) : 1
+2 0 1 2, 2 0 (1) : 1
+0 0 3 3, 5 0 (1) : 1
+2 0 0 3, 3 0 (1) : 1
+2 0 1 1, 4 0 (1) : 1
+1 0 0 0, 1 0 (1) : 1
+0 0 3 3, 3 0 (1) : 2
