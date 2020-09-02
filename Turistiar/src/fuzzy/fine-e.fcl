@@ -1,0 +1,90 @@
+FUNCTION_BLOCK sostenibilidad	// Block definition (there may be more than one block per file)
+
+// Define input variables
+VAR_INPUT				
+	estatus : REAL;
+	presion : REAL;
+    respuesta : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT				
+	isa : REAL;
+END_VAR
+
+// Fuzzify input variable 'estatus': {'debil', 'medio' , 'fuerte'}
+FUZZIFY estatus			
+	TERM debil := (0, 1) (0.4, 0) ; 
+	TERM medio := (0.1, 0) (0.5, 1) (0.9,0);
+	TERM fuerte := (0.6, 0) (1, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 'presion': {'debil', 'medio' , 'fuerte'}
+FUZZIFY presion		
+	TERM debil := (0, 1) (0.4, 0) ; 
+	TERM medio := (0.1, 0) (0.5, 1) (0.9,0);
+	TERM fuerte := (0.6, 0) (1, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 'respuesta': {'debil', 'medio' , 'fuerte'}
+FUZZIFY respuesta		
+	TERM debil := (0, 1) (0.4, 0) ; 
+	TERM medio := (0.1, 0) (0.5, 1) (0.9,0);
+	TERM fuerte := (0.6, 0) (1, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 'isa' : {'muy_bajo', 'bajo', 'intermedio', 'alto','muy_alto' }
+DEFUZZIFY isa			
+	TERM muy_bajo := (0, 1) (0.25, 0);
+	TERM bajo := (0, 0) (0.25, 1) (0.5, 0);
+	TERM intermedio := (0.25, 0) (0.5, 1) (0.75, 0);
+	TERM alto := (0.5, 0) (0.75, 1) (1,0);
+	TERM muy_alto := (0.75, 0) (1, 1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+// Inference rules
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+
+	RULE 1: IF presion IS fuerte AND estatus IS fuerte AND respuesta IS fuerte THEN isa IS muy_alto;
+	RULE 2: IF presion IS fuerte AND estatus IS medio AND respuesta IS fuerte THEN isa IS intermedio;
+	RULE 3: IF presion IS fuerte AND estatus IS debil AND respuesta IS fuerte THEN isa IS bajo;
+
+	RULE 4: IF presion IS fuerte AND estatus IS fuerte AND respuesta IS medio THEN isa IS alto;
+	RULE 5: IF presion IS fuerte AND estatus IS medio AND respuesta IS medio THEN isa IS intermedio;
+	RULE 6: IF presion IS fuerte AND estatus IS debil AND respuesta IS medio THEN isa IS bajo;
+
+	RULE 7: IF presion IS fuerte AND estatus IS fuerte AND respuesta IS debil THEN isa IS intermedio;
+	RULE 8: IF presion IS fuerte AND estatus IS medio AND respuesta IS debil THEN isa IS bajo;
+	RULE 9: IF presion IS fuerte AND estatus IS debil AND respuesta IS debil THEN isa IS muy_bajo;
+
+	RULE 10: IF presion IS medio AND estatus IS fuerte AND respuesta IS fuerte THEN isa IS muy_alto;
+	RULE 11: IF presion IS medio AND estatus IS medio AND respuesta IS fuerte THEN isa IS intermedio;
+	RULE 12: IF presion IS medio AND estatus IS debil AND respuesta IS fuerte THEN isa IS bajo;
+
+	RULE 13: IF presion IS medio AND estatus IS fuerte AND respuesta IS medio THEN isa IS alto;
+	RULE 14: IF presion IS medio AND estatus IS medio AND respuesta IS medio THEN isa IS intermedio;
+	RULE 15: IF presion IS medio AND estatus IS debil AND respuesta IS medio THEN isa IS bajo;
+
+	RULE 16: IF presion IS medio AND estatus IS fuerte AND respuesta IS debil THEN isa IS intermedio;
+	RULE 17: IF presion IS medio AND estatus IS medio AND respuesta IS debil THEN isa IS bajo;
+	RULE 18: IF presion IS medio AND estatus IS debil AND respuesta IS debil THEN isa IS muy_bajo;
+	
+	RULE 19: IF presion IS debil AND estatus IS fuerte AND respuesta IS fuerte THEN isa IS muy_alto;
+	RULE 20: IF presion IS debil AND estatus IS medio AND respuesta IS fuerte THEN isa IS intermedio;
+	RULE 21: IF presion IS debil AND estatus IS debil AND respuesta IS fuerte THEN isa IS bajo;
+
+	RULE 22: IF presion IS debil AND estatus IS fuerte AND respuesta IS medio THEN isa IS alto;
+	RULE 23: IF presion IS debil AND estatus IS medio AND respuesta IS medio THEN isa IS intermedio;
+	RULE 24: IF presion IS debil AND estatus IS debil AND respuesta IS medio THEN isa IS bajo;
+
+	RULE 25: IF presion IS debil AND estatus IS fuerte AND respuesta IS debil THEN isa IS intermedio;
+	RULE 26: IF presion IS debil AND estatus IS medio AND respuesta IS debil THEN isa IS bajo;
+	RULE 27: IF presion IS debil AND estatus IS debil AND respuesta IS debil THEN isa IS muy_bajo;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
