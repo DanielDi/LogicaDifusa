@@ -1,10 +1,10 @@
 [System]
-Name='Turismo'
+Name='Turismo2'
 Type='mamdani'
 Version=2.0
 NumInputs=4
 NumOutputs=2
-NumRules=10
+NumRules=23
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -21,13 +21,11 @@ MF3='alto':'trimf',[12400 30000 30000]
 
 [Input2]
 Name='clima'
-Range=[0 60]
-NumMFs=5
-MF1='polar':'trapmf',[0 0 5 10]
-MF2='frio':'trimf',[7.1 15.4 16.7]
-MF3='templado':'trimf',[15 21 24]
-MF4='seco':'trapmf',[35 42 60 60]
-MF5='tropical':'trimf',[20.7 30 36]
+Range=[0 50]
+NumMFs=3
+MF1='frio':'trapmf',[0 0 8 18]
+MF2='caluroso':'trapmf',[29.17 35 50 50]
+MF3='tropical':'trimf',[14.99 20 32]
 
 [Input3]
 Name='dias_de_estadia'
@@ -46,32 +44,50 @@ MF2='medio':'trimf',[68.2 99 169.430016863406]
 MF3='alto':'trimf',[148 279 279]
 
 [Output1]
-Name='Costo'
-Range=[2000 30000]
+Name='Hotel'
+Range=[0 5]
 NumMFs=5
-MF1='barato':'trimf',[2000 2000 6000]
-MF2='promedio':'trimf',[8217 10530 13610]
-MF3='caro':'trapmf',[11690 17610 20650 24510]
-MF4='economico':'trimf',[3263 7292 9956]
-MF5='muy_caro':'trapmf',[20070 25920 32800 55160]
+MF1='D':'trapmf',[0 0 1 1.5]
+MF2='B':'trimf',[2 3 3.5]
+MF3='A':'trimf',[3 4 4.5]
+MF4='E':'trimf',[1 2 2.5]
+MF5='AA':'trimf',[4 5 5]
 
 [Output2]
 Name='Lugar'
-Range=[0 1]
-NumMFs=4
-MF1='medellin':'trimf',[-0.417 0 0.096964586846543]
-MF2='Moscu':'trimf',[0.361720067453626 0.5 0.719]
-MF3='honk_kong':'trimf',[0.727655986509275 1 1.42]
-MF4='sahara':'trimf',[0.096964586846543 0.299 0.353]
+Range=[0 9]
+NumMFs=9
+MF1='tipo_1':'trimf',[0 0 1.5]
+MF2='tipo_3':'trimf',[1.5 2 3]
+MF3='tipo_4':'trimf',[2.5 3 4]
+MF4='tipo_2':'trimf',[0.5 1 2]
+MF5='tipo_8':'trimf',[6.5 7 8]
+MF6='tipo_7':'trimf',[5.5 6 7]
+MF7='tipo_5':'trimf',[3.5 4 5]
+MF8='tipo_6':'trimf',[4.5 5 6]
+MF9='tipo_9':'trimf',[7.5 8 9]
 
 [Rules]
-3 0 3 3, 5 0 (1) : 1
-2 0 2 2, 2 0 (1) : 1
-1 0 1 1, 1 0 (1) : 1
+0 1 0 1, 0 1 (1) : 1
+0 1 0 2, 0 4 (1) : 1
+0 1 0 3, 0 2 (1) : 1
+0 3 0 1, 0 3 (1) : 1
+0 3 0 2, 0 7 (1) : 1
+0 3 0 3, 0 8 (1) : 1
+0 2 0 1, 0 6 (1) : 1
+0 2 0 2, 0 5 (1) : 1
+0 2 0 3, 0 9 (1) : 1
+1 0 3 0, 1 0 (1) : 1
+3 0 3 0, 3 0 (1) : 1
+3 0 2 0, 5 0 (1) : 1
+2 0 2 0, 2 0 (1) : 1
+2 0 3 0, 4 0 (1) : 1
+2 0 1 0, 3 0 (1) : 1
 1 0 2 1, 4 0 (1) : 1
-2 0 1 2, 2 0 (1) : 1
-0 0 3 3, 5 0 (1) : 1
-2 0 0 3, 3 0 (1) : 1
-2 0 1 1, 4 0 (1) : 1
-1 0 0 0, 1 0 (1) : 1
-0 0 3 3, 3 0 (1) : 2
+1 0 0 3, 1 0 (1) : 1
+1 0 1 0, 2 0 (1) : 1
+3 0 0 1, 5 0 (1) : 1
+3 0 0 2, 3 0 (1) : 1
+3 0 0 3, 3 0 (1) : 1
+2 0 3 3, 1 0 (1) : 1
+3 0 1 0, 5 0 (1) : 1
