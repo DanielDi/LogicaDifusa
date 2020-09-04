@@ -32,7 +32,7 @@ public class OyenteBoton implements ActionListener{
 		String actionCommand = e.getActionCommand();
 		if (e.getSource() instanceof JButton) {
 			if("Enviar".equals(actionCommand)) {
-				FIS fis = FIS.load("src/fuzzy/fine-e.fcl", true);
+				FIS fis = FIS.load("src/fuzzy/turistear.fcl", true);
 				
 				/// Set inputs
 		        fis.setVariable("presupuesto", Double.parseDouble(T1.getText()));

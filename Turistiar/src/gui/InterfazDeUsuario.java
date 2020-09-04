@@ -48,11 +48,11 @@ public class InterfazDeUsuario extends JFrame {
 		JLabel L1 = new JLabel("Presupuesto: ");
 		L1.setToolTipText("<html>Es tu presupuesto en dolares [2000,30000]</html>");
 		JLabel L2 = new JLabel("Clima: ");
-		L2.setToolTipText("<html>Es la calificación de que tan propenso <br> es el estatus a cambiar. [0,1]</html>");
-		JLabel L3 = new JLabel("Numero de dias: ");
-		L3.setToolTipText("<html>Es la cantidad de dias que piensas hacer turismo, [0,30] </html>");
+		L2.setToolTipText("<html>Grados centigrados promedio del clima deseado [0, 50]</html>");
+		JLabel L3 = new JLabel("Días de estadía: ");
+		L3.setToolTipText("<html>Cantidad de días que se piensa hacer turismo [0,30] </html>");
 		JLabel L4 = new JLabel("Costo de vida: ");
-		L4.setToolTipText("<html>Es el indice de costos del lugar que te gustaria ir, [49,279] </html>");
+		L4.setToolTipText("<html>Indice de costo de vida del lugar que te gustaría ir [49,279] </html>");
 		
 
 		// Campo de texto
