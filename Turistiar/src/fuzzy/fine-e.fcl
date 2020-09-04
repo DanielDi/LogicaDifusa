@@ -1,90 +1,73 @@
-FUNCTION_BLOCK sostenibilidad	// Block definition (there may be more than one block per file)
+FUNCTION_BLOCK turistear
 
 // Define input variables
 VAR_INPUT				
-	estatus : REAL;
-	presion : REAL;
-    respuesta : REAL;
+	presupuesto : REAL;
+	clima: REAL;
+    	dias_de_estadia : REAL;
+	costo_vida : REAL;
 END_VAR
 
 // Define output variable
 VAR_OUTPUT				
-	isa : REAL;
+	hotel : REAL;
+	lugar: REAL;
 END_VAR
 
-// Fuzzify input variable 'estatus': {'debil', 'medio' , 'fuerte'}
-FUZZIFY estatus			
-	TERM debil := (0, 1) (0.4, 0) ; 
-	TERM medio := (0.1, 0) (0.5, 1) (0.9,0);
-	TERM fuerte := (0.6, 0) (1, 1);
+
+// Fuzzify input variable 'presupuesto': {'bajo', 'medio' , 'alto'}
+FUZZIFY presupuesto			
+	TERM bajo := (2000, 1) (4000, 1) (6000, 0) ; 
+	TERM medio := (4500, 0) (9500, 1) (11500, 1) (15000,0);
+	TERM alto := (12400, 0) (30000, 1) (30000, 1);
 END_FUZZIFY
 
-// Fuzzify input variable 'presion': {'debil', 'medio' , 'fuerte'}
-FUZZIFY presion		
-	TERM debil := (0, 1) (0.4, 0) ; 
-	TERM medio := (0.1, 0) (0.5, 1) (0.9,0);
-	TERM fuerte := (0.6, 0) (1, 1);
+// Fuzzify input variable 'clima': {'frio', 'tropical’ , 'caluroso'}
+FUZZIFY clima		
+	TERM frio := (0, 1) (8, 1) (18, 0) ; 
+	TERM tropical:= (15, 0) (20, 1) (32, 0);
+	TERM caluroso := (29, 0) (35, 1) (50, 1);
 END_FUZZIFY
 
-// Fuzzify input variable 'respuesta': {'debil', 'medio' , 'fuerte'}
-FUZZIFY respuesta		
-	TERM debil := (0, 1) (0.4, 0) ; 
-	TERM medio := (0.1, 0) (0.5, 1) (0.9,0);
-	TERM fuerte := (0.6, 0) (1, 1);
+// Fuzzify input variable 'dias_de_estadia': {'pocos', 'algunos' , 'muchos'}
+FUZZIFY dias_de_estadia		
+	TERM pocos := (0,1) (3,1) (8, 0) ; 
+	TERM algunos := (4, 0) (13, 1) (20,0);
+	TERM muchos := (17, 0) (22, 1) (30, 1);
 END_FUZZIFY
 
-// Defzzzify output variable 'isa' : {'muy_bajo', 'bajo', 'intermedio', 'alto','muy_alto' }
-DEFUZZIFY isa			
-	TERM muy_bajo := (0, 1) (0.25, 0);
-	TERM bajo := (0, 0) (0.25, 1) (0.5, 0);
-	TERM intermedio := (0.25, 0) (0.5, 1) (0.75, 0);
-	TERM alto := (0.5, 0) (0.75, 1) (1,0);
-	TERM muy_alto := (0.75, 0) (1, 1);
+// Fuzzify input variable 'costo_vida': {'bajo', 'medio' , 'alto'}
+FUZZIFY costo_vida			
+	TERM bajo := (0, 1) (49, 1) (90, 0) ; 
+	TERM medio := (68.2, 0) (99, 1) (170,0);
+	TERM alto := (148, 0) (279, 1) (279, 1);
+END_FUZZIFY
+
+
+// Defuzzify output variable 'hotel’' : {‘D’', 'E', 'B', 'A', 'AA'}
+DEFUZZIFY hotel			
+	TERM D := (0, 1) (1, 1) (1.5, 0);
+	TERM E := (1, 0) (2, 1) (2.5, 0);
+	TERM B := (2, 0) (3, 1) (3.5, 0);
+	TERM A := (3, 0) (4, 1) (4.5, 0);
+	TERM AA := (4, 0) (5, 1);
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
-// Inference rules
-RULEBLOCK No1
-	AND : MIN;	// Use 'min' for 'and'
-	ACT : MIN;	// Use 'min' activation method
-	ACCU : MAX;	// Use 'max' accumulation method
-
-	RULE 1: IF presion IS fuerte AND estatus IS fuerte AND respuesta IS fuerte THEN isa IS muy_alto;
-	RULE 2: IF presion IS fuerte AND estatus IS medio AND respuesta IS fuerte THEN isa IS intermedio;
-	RULE 3: IF presion IS fuerte AND estatus IS debil AND respuesta IS fuerte THEN isa IS bajo;
-
-	RULE 4: IF presion IS fuerte AND estatus IS fuerte AND respuesta IS medio THEN isa IS alto;
-	RULE 5: IF presion IS fuerte AND estatus IS medio AND respuesta IS medio THEN isa IS intermedio;
-	RULE 6: IF presion IS fuerte AND estatus IS debil AND respuesta IS medio THEN isa IS bajo;
-
-	RULE 7: IF presion IS fuerte AND estatus IS fuerte AND respuesta IS debil THEN isa IS intermedio;
-	RULE 8: IF presion IS fuerte AND estatus IS medio AND respuesta IS debil THEN isa IS bajo;
-	RULE 9: IF presion IS fuerte AND estatus IS debil AND respuesta IS debil THEN isa IS muy_bajo;
-
-	RULE 10: IF presion IS medio AND estatus IS fuerte AND respuesta IS fuerte THEN isa IS muy_alto;
-	RULE 11: IF presion IS medio AND estatus IS medio AND respuesta IS fuerte THEN isa IS intermedio;
-	RULE 12: IF presion IS medio AND estatus IS debil AND respuesta IS fuerte THEN isa IS bajo;
-
-	RULE 13: IF presion IS medio AND estatus IS fuerte AND respuesta IS medio THEN isa IS alto;
-	RULE 14: IF presion IS medio AND estatus IS medio AND respuesta IS medio THEN isa IS intermedio;
-	RULE 15: IF presion IS medio AND estatus IS debil AND respuesta IS medio THEN isa IS bajo;
-
-	RULE 16: IF presion IS medio AND estatus IS fuerte AND respuesta IS debil THEN isa IS intermedio;
-	RULE 17: IF presion IS medio AND estatus IS medio AND respuesta IS debil THEN isa IS bajo;
-	RULE 18: IF presion IS medio AND estatus IS debil AND respuesta IS debil THEN isa IS muy_bajo;
-	
-	RULE 19: IF presion IS debil AND estatus IS fuerte AND respuesta IS fuerte THEN isa IS muy_alto;
-	RULE 20: IF presion IS debil AND estatus IS medio AND respuesta IS fuerte THEN isa IS intermedio;
-	RULE 21: IF presion IS debil AND estatus IS debil AND respuesta IS fuerte THEN isa IS bajo;
-
-	RULE 22: IF presion IS debil AND estatus IS fuerte AND respuesta IS medio THEN isa IS alto;
-	RULE 23: IF presion IS debil AND estatus IS medio AND respuesta IS medio THEN isa IS intermedio;
-	RULE 24: IF presion IS debil AND estatus IS debil AND respuesta IS medio THEN isa IS bajo;
-
-	RULE 25: IF presion IS debil AND estatus IS fuerte AND respuesta IS debil THEN isa IS intermedio;
-	RULE 26: IF presion IS debil AND estatus IS medio AND respuesta IS debil THEN isa IS bajo;
-	RULE 27: IF presion IS debil AND estatus IS debil AND respuesta IS debil THEN isa IS muy_bajo;
-END_RULEBLOCK
+// Defzzzify output variable 'lugar' : {'tipo1', 'tipo2', 'tipo3', 'tipo4', 'tipo5', 'tipo6', 'tipo7', 'tipo8', 'tipo9'}
+DEFUZZIFY lugar			
+	TERM tipo1 := (0, 1) (1.5,0);
+	TERM tipo2 := (0.5, 0) (1,1) (2, 0);
+	TERM tipo3 := (1.5, 0) (2,1) (3, 0);
+	TERM tipo4 := (2.5, 0) (3,1) (4, 0);
+	TERM tipo5 := (3.5, 0) (4,1) (5, 0);
+	TERM tipo6 := (4.5, 0) (5,1) (6, 0);
+	TERM tipo7 := (5.5, 0) (6,1) (7, 0);
+	TERM tipo8 := (6.5, 0) (7,1) (8, 0);
+	TERM tipo9 := (7.5, 0) (8,1) (9, 0);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
 
 END_FUNCTION_BLOCK

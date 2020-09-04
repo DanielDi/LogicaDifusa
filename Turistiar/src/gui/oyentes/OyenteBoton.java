@@ -32,23 +32,31 @@ public class OyenteBoton implements ActionListener{
 		String actionCommand = e.getActionCommand();
 		if (e.getSource() instanceof JButton) {
 			if("Enviar".equals(actionCommand)) {
-				FIS sostenibilidad = FIS.load("src/fuzzy/fine-e.fcl", true);
+				FIS fis = FIS.load("src/fuzzy/fine-e.fcl", true);
 				
-				// Set inputs
-				sostenibilidad.setVariable("estatus", Double.parseDouble(T1.getText()));
-				sostenibilidad.setVariable("presion", Double.parseDouble(T2.getText()));
-				sostenibilidad.setVariable("respuesta", Double.parseDouble(T3.getText()));
+				/// Set inputs
+		        fis.setVariable("presupuesto", Double.parseDouble(T1.getText()));
+		        fis.setVariable("clima", Double.parseDouble(T2.getText()));
+		        fis.setVariable("dias_de_estadia", Double.parseDouble(T3.getText()));
+		        fis.setVariable("costo_vida", Double.parseDouble(T4.getText()));
 		        
 		        // Evaluate
-				sostenibilidad.evaluate(); 
+				fis.evaluate(); 
 
-		        //Graficas de conjuntos difusos
-		        JFuzzyChart.get().chart(sostenibilidad.getFunctionBlock("sostenibilidad"));
+				// Show
+		        JFuzzyChart.get().chart(fis.getFunctionBlock("turistear"));
+		        
+		        Double x = fis.getVariable("hotel").getLatestDefuzzifiedValue();
+		        Double y = fis.getVariable("lugar").getLatestDefuzzifiedValue();
+		        System.err.println("Para los valores de salida el grado de pertenencia para hotel es: " + x);
+		        System.err.println("Para los valores de salida el grado de pertenencia para luagar es: " + y);
 
 		        // Show output variable
 		        /**
 		        TA1.setText(sostenibilidad.getVariable("isa").toString());
 		        */
+		        
+		        /*
 		        TA1.setText(TA1.getText() + "El Indicador de Sostenibilidad Ambiental (ISA) es: " + sostenibilidad.getVariable("isa").defuzzify());		        
 		        TA1.setText(TA1.getText() + "\n \n" + "El metodo usado para 'defuzzificar' el ISA fue: " + sostenibilidad.getVariable("isa").getDefuzzifier());
 		        TA1.setText(TA1.getText() + "\n \n" + "El grado de pertenencia a los conjuntos difusos es: ");
@@ -62,6 +70,7 @@ public class OyenteBoton implements ActionListener{
 		        									+ "proyecto ambientalmente.\n"
 		        									+ "Siendo 0 poco sostenible y 1 muy sostenible.");
 		        TA1.setEditable(false);
+		        */
 			}
 		}
 	}
