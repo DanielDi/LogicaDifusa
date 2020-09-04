@@ -70,11 +70,7 @@ public class OyenteBoton implements ActionListener{
 		        
 		        ArrayList<String> array_ciudades =  new ArrayList<String>();
 		        array_ciudades = get_ciudades(tipo);
-		        
-		        for(String uwu :array_ciudades) {
-		        	System.out.println(uwu);
-		        }
-		        
+		        		        
 		        ArrayList<Double> array_hotel =  new ArrayList<Double>();
 		        array_hotel.add(fis.getVariable("hotel").getMembership("D"));
 		        array_hotel.add(fis.getVariable("hotel").getMembership("E"));
@@ -82,9 +78,6 @@ public class OyenteBoton implements ActionListener{
 		        array_hotel.add(fis.getVariable("hotel").getMembership("A"));
 		        array_hotel.add(fis.getVariable("hotel").getMembership("AA"));
 		        
-		        for(double uwu2 :array_hotel) {
-		        	System.out.println(uwu2);
-		        }
 		        
 		        String hotel = get_hotel(array_hotel);
 		        // Show output variable
