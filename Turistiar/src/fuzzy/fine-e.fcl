@@ -69,5 +69,37 @@ DEFUZZIFY lugar
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
+	
+// Inference rules
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+
+RULE 1: IF clima IS frio AND costo_vida IS bajo THEN lugar IS tipo1;
+RULE 2: IF clima IS frio AND costo_vida IS medio THEN lugar IS tipo2 ;
+RULE 3: IF clima IS frio AND costo_vida IS alto THEN  lugar IS tipo3 ;
+RULE 4: IF clima IS tropical AND costo_vida IS bajo THEN lugar IS tipo4 ;
+RULE 5: IF clima IS tropical AND costo_vida IS medio THEN lugar IS tipo5 ;
+RULE 6: IF clima IS tropical AND costo_vida IS alto THEN lugar IS tipo6 ;
+RULE 7: IF clima IS caluroso AND costo_vida IS bajo THEN lugar IS tipo7 ;
+RULE 8: IF clima IS caluroso AND costo_vida IS medio THEN lugar IS tipo8 ;
+RULE 9: IF clima IS caluroso AND costo_vida IS alto THEN lugar IS tipo9 ;
+RULE 10: IF presupuesto IS bajo AND dias_de_estadia IS muchos THEN hotel IS D ;
+RULE 11: IF presupuesto IS alto AND dias_de_estadia IS muchos THEN hotel IS A ;
+RULE 12: IF presupuesto IS alto AND dias_de_estadia IS algunos THEN hotel IS AA ;
+RULE 13: IF presupuesto IS medio AND dias_de_estadia IS algunos THEN hotel IS B ;
+RULE 14: IF presupuesto IS medio AND dias_de_estadia IS muchos THEN hotel IS E;
+RULE 15: IF presupuesto IS medio AND dias_de_estadia IS pocos THEN hotel IS A ;
+RULE 16: IF presupuesto IS bajo AND dias_de_estadia IS algunos AND costo_vida IS bajo THEN hotel IS E; 
+RULE 17: IF presupuesto IS bajo AND costo_vida IS alto THEN hotel IS D ;
+RULE 18: IF presupuesto IS bajo AND dias_de_estadia IS pocos THEN hotel IS B;
+RULE 19: IF presupuesto IS alto AND costo_vida IS bajo THEN hotel IS AA;
+RULE 20: IF presupuesto IS alto AND costo_vida IS medio THEN hotel IS A;
+RULE 21: IF presupuesto IS alto AND costo_vida IS alto THEN hotel IS A;
+RULE 22: IF presupuesto IS medio AND dias_de_estadia IS muchos AND costo_vida IS alto THEN hotel IS D ;
+RULE 23: IF presupuesto IS alto AND dias_de_estadia IS pocos THEN hotel IS AA; 
+
+END_RULEBLOCK
 
 END_FUNCTION_BLOCK
