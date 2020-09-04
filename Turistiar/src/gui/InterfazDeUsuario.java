@@ -29,13 +29,13 @@ public class InterfazDeUsuario extends JFrame {
 		super("Turistiar");
 
 		// Asignar aspectos basicos de la ventana
-		this.setMinimumSize(new Dimension(450, 650));
-		this.setSize(450, 600);
-		this.setVisible(true);
+		//this.setMinimumSize(new Dimension(472, 710));
+		this.setSize(472, 710);
+		//this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
-		
+		this.setResizable(false);
 		// Labels
 		JLabel bienvenida = new JLabel(
 				"<html>"
@@ -74,9 +74,13 @@ public class InterfazDeUsuario extends JFrame {
 		JS1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		// Paneles
+		JpanelConFondo P0 = new JpanelConFondo();
+		
 		JPanel P1 = new JPanel();
+		P1.setOpaque(false);
 
 		JPanel P1_1 = new JPanel();
+		P1_1.setOpaque(false);
 
 		JPanel P2 = new JPanel();
 		P2.setLayout(new BorderLayout());
@@ -104,6 +108,7 @@ public class InterfazDeUsuario extends JFrame {
 		JPanel P2_2_3 = new JPanel();
 
 		JPanel P3 = new JPanel();
+		P3.setOpaque(false);
 
 		JPanel P3_1 = new JPanel();
 
@@ -136,9 +141,10 @@ public class InterfazDeUsuario extends JFrame {
 		ayuda.add(info);
 
 		// Asignacion de paneles
-		this.add(P1, BorderLayout.NORTH);
-		this.add(P2, BorderLayout.CENTER);
-		this.add(P3, BorderLayout.SOUTH);
+		this.add(P0);
+		P0.add(P1, BorderLayout.NORTH);
+		P0.add(P2, BorderLayout.CENTER);
+		P0.add(P3, BorderLayout.SOUTH);
 
 		P1.add(P1_1);
 		P1.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
@@ -180,5 +186,6 @@ public class InterfazDeUsuario extends JFrame {
 		P3.add(P3_1);
 
 		P3_1.add(JS1);
+		this.setVisible(true);
 	}
 }
