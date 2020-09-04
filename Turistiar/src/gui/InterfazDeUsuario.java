@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import gui.oyentes.OyenteBoton;
 import gui.oyentes.OyenteMenu;
@@ -33,10 +35,16 @@ public class InterfazDeUsuario extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
-
+		
 		// Labels
 		JLabel bienvenida = new JLabel(
-				"<html><center><font size=6><center>Bienvenidos a</center></font><font size=7><center>TURISTIAR 8====D</center></font></center></html>");
+				"<html>"
+				+ "<center><font size=6>Bienvenidos a</font></center>"
+				+ "<center><h1 style='font-style: italic;'>Turistear</center>"
+				
+				+ "</html>", new ImageIcon("src/images/airplane.png"), SwingConstants.CENTER);
+		
+		
 		JLabel L1 = new JLabel("Presupuesto: ");
 		L1.setToolTipText("<html>Es tu presupuesto en dolares [2000,30000]</html>");
 		JLabel L2 = new JLabel("Clima: ");
