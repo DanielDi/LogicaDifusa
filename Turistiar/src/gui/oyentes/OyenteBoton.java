@@ -84,24 +84,9 @@ public class OyenteBoton implements ActionListener{
 		        /**
 		        TA1.setText(sostenibilidad.getVariable("isa").toString());
 		        */
-		        TA1.setText(TA1.getText() + hotel);
-		        TA1.setText(TA1.getText() + array_ciudades);
-		        
-		        /*
-		        TA1.setText(TA1.getText() + "El Indicador de Sostenibilidad Ambiental (ISA) es: " + sostenibilidad.getVariable("isa").defuzzify());		        
-		        TA1.setText(TA1.getText() + "\n \n" + "El metodo usado para 'defuzzificar' el ISA fue: " + sostenibilidad.getVariable("isa").getDefuzzifier());
-		        TA1.setText(TA1.getText() + "\n \n" + "El grado de pertenencia a los conjuntos difusos es: ");
-		        TA1.setText(TA1.getText() + "\n" + "	'muy bajo': " + sostenibilidad.getVariable("isa").getMembership("muy_bajo"));
-		        TA1.setText(TA1.getText() + "\n" + "	'bajo': " + sostenibilidad.getVariable("isa").getMembership("bajo"));
-		        TA1.setText(TA1.getText() + "\n" + "	'intermedio': " + sostenibilidad.getVariable("isa").getMembership("intermedio"));
-		        TA1.setText(TA1.getText() + "\n" + "	'alto': " + sostenibilidad.getVariable("isa").getMembership("alto"));
-		        TA1.setText(TA1.getText() + "\n" + "	'muy alto': " + sostenibilidad.getVariable("isa").getMembership("muy_alto"));
-		        TA1.setText(TA1.getText() + "\n \n" + "El Indicador de Sostenibilidad Ambiental (ISA) es una medida de 0 a 1, \n"
-		        									+ "que dice aproximadamente que tan sostenible puede llegar a ser un\n "
-		        									+ "proyecto ambientalmente.\n"
-		        									+ "Siendo 0 poco sostenible y 1 muy sostenible.");
-		        TA1.setEditable(false);
-		        */
+		        TA1.setText(TA1.getText() + "Según tus preferencias se te recomienda: \n \n - Optar por un hotel de tipo:\n          " + hotel);
+		        TA1.setText(TA1.getText() + "\n \n - En alguno de los siguientes lugares \n          " 
+		        			+ array_ciudades.get(0) + "\n          " + array_ciudades.get(1) + "\n          "+ array_ciudades.get(2));
 			}
 		}
 	}

@@ -86,8 +86,8 @@ RULE 7: IF clima IS caluroso AND costo_vida IS bajo THEN lugar IS tipo7 ;
 RULE 8: IF clima IS caluroso AND costo_vida IS medio THEN lugar IS tipo8 ;
 RULE 9: IF clima IS caluroso AND costo_vida IS alto THEN lugar IS tipo9 ;
 RULE 10: IF presupuesto IS bajo AND dias_de_estadia IS muchos THEN hotel IS D ;
-RULE 11: IF presupuesto IS alto AND dias_de_estadia IS muchos THEN hotel IS A ;
-RULE 12: IF presupuesto IS alto AND dias_de_estadia IS algunos THEN hotel IS AA ;
+RULE 11: IF presupuesto IS alto AND dias_de_estadia IS muchos THEN hotel IS B ;
+RULE 12: IF presupuesto IS alto AND dias_de_estadia IS algunos THEN hotel IS A ;
 RULE 13: IF presupuesto IS medio AND dias_de_estadia IS algunos THEN hotel IS B ;
 RULE 14: IF presupuesto IS medio AND dias_de_estadia IS muchos THEN hotel IS E;
 RULE 15: IF presupuesto IS medio AND dias_de_estadia IS pocos THEN hotel IS A ;
@@ -98,7 +98,7 @@ RULE 19: IF presupuesto IS alto AND costo_vida IS bajo THEN hotel IS AA;
 RULE 20: IF presupuesto IS alto AND costo_vida IS medio THEN hotel IS A;
 RULE 21: IF presupuesto IS alto AND costo_vida IS alto THEN hotel IS A;
 RULE 22: IF presupuesto IS medio AND dias_de_estadia IS muchos AND costo_vida IS alto THEN hotel IS D ;
-RULE 23: IF presupuesto IS alto AND dias_de_estadia IS pocos THEN hotel IS AA; 
+RULE 23: IF presupuesto IS alto AND dias_de_estadia IS pocos THEN hotel IS AA;
 
 END_RULEBLOCK
 
