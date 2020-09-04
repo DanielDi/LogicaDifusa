@@ -2,6 +2,8 @@ package gui.oyentes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -9,6 +11,7 @@ import javax.swing.JTextField;
 
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
+import java.util.ArrayList;
 
 public class OyenteBoton implements ActionListener{
 
@@ -50,11 +53,46 @@ public class OyenteBoton implements ActionListener{
 		        Double y = fis.getVariable("lugar").getLatestDefuzzifiedValue();
 		        System.err.println("Para los valores de salida el grado de pertenencia para hotel es: " + x);
 		        System.err.println("Para los valores de salida el grado de pertenencia para luagar es: " + y);
-
+		        
+		        ArrayList<Double> array_tipo =  new ArrayList<Double>();
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo1"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo2"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo3"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo4"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo5"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo6"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo7"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo8"));
+		        array_tipo.add(fis.getVariable("lugar").getMembership("tipo9"));
+		        
+		        String tipo = get_tipo(array_tipo);
+		        System.out.println(tipo);
+		        
+		        ArrayList<String> array_ciudades =  new ArrayList<String>();
+		        array_ciudades = get_ciudades(tipo);
+		        
+		        for(String uwu :array_ciudades) {
+		        	System.out.println(uwu);
+		        }
+		        
+		        ArrayList<Double> array_hotel =  new ArrayList<Double>();
+		        array_hotel.add(fis.getVariable("hotel").getMembership("D"));
+		        array_hotel.add(fis.getVariable("hotel").getMembership("E"));
+		        array_hotel.add(fis.getVariable("hotel").getMembership("B"));
+		        array_hotel.add(fis.getVariable("hotel").getMembership("A"));
+		        array_hotel.add(fis.getVariable("hotel").getMembership("AA"));
+		        
+		        for(double uwu2 :array_hotel) {
+		        	System.out.println(uwu2);
+		        }
+		        
+		        String hotel = get_hotel(array_hotel);
 		        // Show output variable
 		        /**
 		        TA1.setText(sostenibilidad.getVariable("isa").toString());
 		        */
+		        TA1.setText(TA1.getText() + hotel);
+		        TA1.setText(TA1.getText() + array_ciudades);
 		        
 		        /*
 		        TA1.setText(TA1.getText() + "El Indicador de Sostenibilidad Ambiental (ISA) es: " + sostenibilidad.getVariable("isa").defuzzify());		        
@@ -74,4 +112,85 @@ public class OyenteBoton implements ActionListener{
 			}
 		}
 	}
+	
+	public String get_tipo(ArrayList<Double> array_tipo) {
+		double max = Collections.max(array_tipo);
+		int indice = array_tipo.indexOf(max) + 1;
+		return "tipo"+ String.valueOf(indice);
+	}
+	
+	public String get_hotel(ArrayList<Double> array_hotel) {
+		double max = Collections.max(array_hotel);
+		int indice = array_hotel.indexOf(max) + 1;
+		
+		switch(indice) {
+		case 1:
+			return "D- ☆  Estrellas";
+		case 2:
+			return "E- ☆☆ Estrellas";
+		case 3:
+			return "B- ☆☆☆  Estrellas";
+		case 4:
+			return "A- ☆☆☆☆ Estrellas";
+		case 5:
+			return "AA- ☆☆☆☆☆  Estrellas";
+		default:
+			return "";
+		}
+	}
+	
+	public ArrayList<String> get_ciudades (String tipo) {
+			
+			ArrayList<String> paises = new ArrayList<String>();
+			
+			switch(tipo){
+			case "tipo1":
+				paises.add("Moscú (Rusia)");
+				paises.add("Kiev (Ucrania)");
+				paises.add("Patagonia (Argentina)");
+				return paises;
+			case "tipo2":
+				paises.add("Niza (Francia)");
+				paises.add("Berlín (Alemania)");
+				paises.add("Milán (Italia)");
+				return paises;
+			case "tipo3":
+				paises.add("Auckland (Nueva Zelanda)");
+				paises.add("Toronto (Canada)");
+				paises.add("New York (Estados Unidos)");
+				return paises;
+			case "tipo4":
+				paises.add("Medellín (Colombia)");
+				paises.add("São Paulo (Brasil)");
+				paises.add("Ciudad de México (México)");
+				return paises;
+			case "tipo5":
+				paises.add("SanJose (Costa Rica)");
+				paises.add("Valencia (España)");
+				paises.add("New Orleans (Estados Unidos)");
+				return paises;
+			case "tipo6":
+				paises.add("Abu Dabi (Emiratos Árabes Unidos)");
+				paises.add("Sídney (Australia)");
+				paises.add("Hamilton (Bermuda)");
+				return paises;
+			case "tipo7":
+				paises.add("Cairo (Egipto)");
+				paises.add("Barranquilla (Colombia)");
+				paises.add("Maracaibo (Venezuela)");
+				return paises;
+			case "tipo8":
+				paises.add("Bangkok (Tailandia)");
+				paises.add("Tel Aviv (Israel)");
+				paises.add("Las Vegas (Estados Unidos)");
+				return paises;
+			case "tipo9":
+				paises.add("Doha (Qatar)");
+				paises.add("Hawaii (Estados Unidos)");
+				paises.add("Hong Kong (China)");
+				return paises;
+			default:
+				return paises;
+			}
+		}
 }

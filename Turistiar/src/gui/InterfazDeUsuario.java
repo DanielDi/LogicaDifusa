@@ -188,4 +188,5 @@ public class InterfazDeUsuario extends JFrame {
 		P3_1.add(JS1);
 		this.setVisible(true);
 	}
+	
 }
